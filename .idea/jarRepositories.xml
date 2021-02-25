@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="nexus-aliyun" />
+      <option name="name" value="nexus-aliyun" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="repo" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven.central" />
+      <option name="name" value="maven.central" />
+      <option name="url" value="http://central.maven.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="netease-release" />
+      <option name="name" value="netease-release" />
+      <option name="url" value="http://mvn.hz.netease.com/artifactory/libs-releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="repo" />
+      <option name="url" value="http://mvn.hz.netease.com/artifactory/repo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="comic-snapshots" />
+      <option name="name" value="comic-snapshots" />
+      <option name="url" value="http://10.172.113.214:8081/content/repositories/snapshots" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="http://repo1.maven.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="repository.springframework.maven.snapshot" />
+      <option name="name" value="Spring Framework Maven Snapshot Repository" />
+      <option name="url" value="http://repo.spring.io/snapshot/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="comic-releases" />
+      <option name="name" value="comic-releases" />
+      <option name="url" value="http://10.172.113.214:8081/content/repositories/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="snapshots" />
+      <option name="name" value="snapshots-only" />
+      <option name="url" value="http://mvn.hz.netease.com/artifactory/snapshots-only" />
+    </remote-repository>
+  </component>
+</project>

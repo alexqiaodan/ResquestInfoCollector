@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>数据表格页面</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<div class="container-fluid">
+    <!--导航栏-->
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#">异常接口信息查询</a></li>
+<!--                <li role="presentation"><a href="#">Profile</a></li>-->
+<!--                <li role="presentation"><a href="#">Messages</a></li>-->
+            </ul>
+        </div>
+        <div class="col-md-6" >
+            <ul class="nav nav-pills" style="float: right">
+<!--                <li role="presentation" class="active"><a href="#">登录</a></li>-->
+<!--                <li role="presentation"><a href="#">注册</a></li>-->
+            </ul>
+        </div>
+    </div>
+    <form action="#" th:action="@{/qabackend/queryByContidions}" method="post">
+        <label for="deviceID">设备ID：</label><input id="deviceID" name="deviceID" th:value="${searchParam.deviceID}"></input>
+        <label for="user">测试人员：</label><input id="user" name="user" th:value="${searchParam.user}"></input>
+        <label for="clientIp">设备IP：</label><input id="clientIp" name="clientIp" th:value="${searchParam.clientIp}"></input>
+        <label for="hostIp">服务器IP：</label><input id="hostIp" name="hostIp" th:value="${searchParam.hostIp}"></input>
+        <label for="host">域名：</label><input id="host" name="host" th:value="${searchParam.host}"></input>
+        <label for="requestUrl">请求地址：</label><input id="requestUrl" name="requestUrl" th:value="${searchParam.requestUrl}"></input>
+        <label for="responseCode">响应码：</label><input id="responseCode" name="responseCode" th:value="${searchParam.responseCode}"></input>
+        <button id="search-btn" name="search-btn">搜索</button>
+    </form>
+
+<!--    <div class="row" align="center">-->
+<!--        <a th:unless="${pages.isFirstPage}"-->
+<!--           th:href="@{/qabackend/queryByContidions(deviceID=${deviceID},user=${user},clientIp=${clientIp},hostIp=${hostIp},host=${host},requestUrl=${requestUrl},responseCode=${responseCode})}">首 页</a>-->
+<!--        <a th:unless="${pages.isFirstPage}"-->
+<!--           th:href="@{/qabackend/queryByContidions(start=${pages.hasPreviousPage}?${pages.prePage}:1, deviceID=${deviceID},user=${user},clientIp=${clientIp},hostIp=${hostIp},host=${host},requestUrl=${requestUrl},responseCode=${responseCode})}">上一页</a>-->
+<!--        <a th:unless="${pages.isLastPage}"-->
+<!--           th:href="@{/qabackend/queryByContidions(start=${pages.hasNextPage}?${pages.nextPage}:${pages.pages}, deviceID=${deviceID},user=${user},clientIp=${clientIp},hostIp=${hostIp},host=${host},requestUrl=${requestUrl},responseCode=${responseCode})}">下一页</a>-->
+<!--        <a th:unless="${pages.isLastPage}"-->
+<!--           th:href="@{//qabackend/queryByContidions(start=${pages.pages}, deviceID=${deviceID},user=${user},clientIp=${clientIp},hostIp=${hostIp},host=${host},requestUrl=${requestUrl},responseCode=${responseCode})}">末 页</a>-->
+<!--    </div>-->
+
+    <nav class="mt-5" th:if="${page.rows}>0">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{${page.path}(current=1,deviceID=${searchParam.deviceID},user=${searchParam.user},clientIp=${searchParam.clientIp},hostIp=${searchParam.hostIp},host=${searchParam.host},requestUrl=${searchParam.requestUrl},responseCode=${searchParam.responseCode})}">首页</a>
+            </li>
+            <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                <a class="page-link" th:href="@{${page.path}(current=${page.current-1},deviceID=${searchParam.deviceID},user=${searchParam.user},clientIp=${searchParam.clientIp},hostIp=${searchParam.hostIp},host=${searchParam.host},requestUrl=${searchParam.requestUrl},responseCode=${searchParam.responseCode})}">上一页</a></li>
+            <li th:class="|page-item ${i==page.current?'active':''}|"
+                th:each="i:${#numbers.sequence(page.from,page.to)}">
+                <a class="page-link" th:href="@{${page.path}(current=${i},deviceID=${searchParam.deviceID},user=${searchParam.user},clientIp=${searchParam.clientIp},hostIp=${searchParam.hostIp},host=${searchParam.host},requestUrl=${searchParam.requestUrl},responseCode=${searchParam.responseCode})}" th:text="${i}">1</a>
+            </li>
+            <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                <a class="page-link" th:href="@{${page.path}(current=${page.current+1},deviceID=${searchParam.deviceID},user=${searchParam.user},clientIp=${searchParam.clientIp},hostIp=${searchParam.hostIp},host=${searchParam.host},requestUrl=${searchParam.requestUrl},responseCode=${searchParam.responseCode})}">下一页</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{${page.path}(current=${page.total},deviceID=${searchParam.deviceID},user=${searchParam.user},clientIp=${searchParam.clientIp},hostIp=${searchParam.hostIp},host=${searchParam.host},requestUrl=${searchParam.requestUrl},responseCode=${searchParam.responseCode})}">末页</a>
+            </li>
+        </ul>
+    </nav>
+
+
+<!--    <div class="row">-->
+<!--        <div class="col-md-12">-->
+<!--            <nav aria-label="Page navigation">-->
+<!--                <ul class="pagination" style="float: right">-->
+<!--                    <li>-->
+<!--                        <a href="#" aria-label="Previous">-->
+<!--                            <span aria-hidden="true">&laquo;</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li><a href="#">1</a></li>-->
+<!--                    <li><a href="#">2</a></li>-->
+<!--                    <li><a href="#">3</a></li>-->
+<!--                    <li><a href="#">4</a></li>-->
+<!--                    <li><a href="#">5</a></li>-->
+<!--                    <li>-->
+<!--                        <a href="#" aria-label="Next">-->
+<!--                            <span aria-hidden="true">&raquo;</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </nav>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <!--for循环绑定到表格上-->
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+            <tr class="success">
+                <th><input type="checkbox"></input></th>
+                <th>序号</th>
+                <th>设备ID</th>
+                <th>测试人员</th>
+                <th>设备IP</th>
+                <th>服务端IP</th>
+                <th>请求域名</th>
+                <th>请求路径</th>
+                <th>响应码</th>
+                <th>请求耗时,ms</th>
+                <th>复制curl</th>
+                <th>curl 命令</th>
+                <th>信息上报时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tr th:each="requestInfo:${requestInfos}">
+                <td><input type="checkbox" class="check"></input></td>
+                <td th:text="${requestInfo.id}"></td>
+                <td th:text="${requestInfo.deviceID}"></td>
+                <td th:text="${requestInfo.user}"></td>
+                <td th:text="${requestInfo.clientIp}"></td>
+                <td th:text="${requestInfo.hostIp}"></td>
+                <td th:text="${requestInfo.host}"></td>
+                <td th:text="${requestInfo.requestUrl}"></td>
+                <td th:text="${requestInfo.responseCode}"></td>
+                <td th:text="${requestInfo.timeCost}"></td>
+                <td><button  class="btn" th:onClick="copyCurl([[${requestInfo.id}]]);">点击复制curl</button></td>
+                <td th:text="${requestInfo.curl}" th:id="${requestInfo.id}+'curl'"></td>
+                <td th:text="${requestInfo.uploadTime}"></td>
+
+
+                <td>
+                    <button type="button" class="btn btn-default">修改</button>
+                    <button type="button" class="btn btn-default">删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<script type="text/javascript">
+
+    function copyCurl(id) {
+        var curl = document.getElementById(id + "curl").innerText;
+        var oInput = document.createElement('input');
+        oInput.value = curl;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display = 'none';
+        alert('复制成功');
+    }
+
+</script>
+</body>
+</html>

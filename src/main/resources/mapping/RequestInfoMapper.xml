@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.springboot.mapper.RequestInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.test.springboot.entity.RequestInfo">
+        <result column="ID" jdbcType="INTEGER" property="id" />
+        <result column="DeviceID" jdbcType="VARCHAR" property="deviceID" />
+        <result column="User" jdbcType="VARCHAR" property="user" />
+        <result column="ClientIp" jdbcType="VARCHAR" property="clientIp" />
+        <result column="HostIp" jdbcType="VARCHAR" property="hostIp" />
+        <result column="Host" jdbcType="VARCHAR" property="host" />
+        <result column="RequestUrl" jdbcType="VARCHAR" property="requestUrl" />
+        <result column="ResponseCode" jdbcType="VARCHAR" property="responseCode" />
+        <result column="TimeCost" jdbcType="VARCHAR" property="timeCost" />
+        <result column="Curl" jdbcType="VARCHAR" property="curl" />
+        <result column="UploadTime" jdbcType="VARCHAR" property="uploadTime" />
+        <result column="CreateTime" jdbcType="VARCHAR" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,DeviceID,`User`,ClientIp,HostIp,Host,RequestUrl,ResponseCode,TimeCost,Curl,UploadTime,CreateTime
+    </sql>
+    <sql id="Query_Body">
+        from RequestInfo
+        where 1=1
+        <if test="deviceID != 'null' and deviceID != null ">
+            and DeviceID = #{deviceID}
+        </if>
+        <if test="user != 'null' and user != null">
+            and `User` = #{user}
+        </if>
+        <if test="clientIp != 'null' and clientIp != null">
+            and `ClientIp` = #{clientIp}
+        </if>
+        <if test="clientIp != 'null' and clientIp != null">
+            and HostIp = #{hostIp}
+        </if>
+        <if test="host != 'null' and host != null">
+            and Host = #{host}
+        </if>
+        <if test="requestUrl != 'null' and requestUrl != null">
+            and RequestUrl = #{requestUrl}
+        </if>
+        <if test="responseCode != 'null' and responseCode != null">
+            and ResponseCode = #{responseCode}
+        </if>
+        <if test="timeCost != 'null' and timeCost != null and timeCost != 0">
+            and TimeCost = #{timeCost}
+        </if>
+        <if test="curl != 'null' and curl != null">
+            and Curl = #{curl}
+        </if>
+        <if test="uploadTimeStart != 'null' and uploadTimeEnd != 'null' and uploadTimeStart != null and uploadTimeEnd != null and uploadTimeStart != 0 and uploadTimeEnd != 0">
+            and UploadTime &gt; #{uploadTimeStart} and UploadTime &lt; #{uploadTimeStart}
+        </if>
+
+
+
+    </sql>
+
+    <select id="queryByContidions-V1" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="Query_Body"/>
+
+        <if test="limit != 0">
+            limit #{limit}
+        </if>
+        <if test="offset != 0">
+            offset #{offset}
+        </if>
+    </select>
+
+    <select id="query" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="Query_Body"/>
+    </select>
+
+</mapper>
